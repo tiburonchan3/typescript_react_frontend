@@ -1,12 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {BrowserRouter,Route,Switch} from 'react-router-dom'
+import {VideoList} from './components/Videos/VideoList'
+import {VideoForm} from './components/Videos/VideoForm'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'react-toastify/dist/ReactToastify.css'
+import {NavbarMenu} from './components/NavBar/Navbar'
+import {ToastContainer} from 'react-toastify'
+import {Container} from 'react-bootstrap'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <BrowserRouter>
+        <NavbarMenu/>
+        <Container>
+        <Switch>
+            <Route path="/" exact={true} component={VideoList} />
+            <Route path="/new-video" exact={true} component={VideoForm}/>
+            <Route path="/update/:id" exact={true} component={VideoForm}/>
+        </Switch>
+        </Container>
+      </BrowserRouter>
+      <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick={false}
+                draggable
+                pauseOnHover
+            />
   </React.StrictMode>,
   document.getElementById('root')
 );
